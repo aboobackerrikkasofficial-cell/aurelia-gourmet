@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurelia Gourmet | Imperial Handpicked Dry Fruits</title>
+  <meta name="description" content="Indulge in the finest selection of organic, luxury dry fruits imported from the world's most fertile regions. Aurelia Gourmet defines high-end nourishment.">
+  <meta name="keywords" content="luxury dry fruits, gourmet almonds, premium cashews, handpicked saffron, imported walnuts, organic dates, premium nuts, healthy luxury">
+  
+  <!-- Preload Hero Images for LCP Optimization -->
+  <link rel="preload" as="image" href="images/california-gold-almonds.webp">
+  <link rel="preload" as="image" href="images/imperial-saffron-collection.webp">
+  <link rel="preload" as="image" href="images/velvet-ivory-cashews.webp">
+
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Primary Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Global Premium Image Loader and Fallback Logic -->
+  <script>
+    function handleBrokenImage(img) {
+      img.onerror = null; // Prevent infinite loop in case fallback fails
+      img.removeAttribute('srcset'); // Force browser to discard broken responsive images
+      img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' width='100%' height='100%' style='background:%23120A05; font-family:%22Cinzel%22, %22Playfair Display%22, serif;'><rect width='100%' height='100%' fill='%23120A05'/><path d='M200,60 L245,105 L215,175 L185,175 L155,105 Z' fill='none' stroke='%23D4AF37' stroke-width='2'/><circle cx='200' cy='112' r='14' fill='none' stroke='%23D4AF37' stroke-width='1.5'/><text x='200' y='215' fill='%23D4AF37' font-size='18' font-weight='700' letter-spacing='5' text-anchor='middle'>AURELIA</text><text x='200' y='240' fill='%23C5A880' font-size='10' font-weight='500' letter-spacing='7' text-anchor='middle'>GOURMET</text></svg>";
+      
+      const container = img.closest('.image-skeleton-container');
+      if (container) {
+        container.classList.remove('loading-skeleton');
+      }
+      img.classList.add('loaded');
+      img.classList.add('broken-fallback');
+    }
+
+    function initImageLoad(img) {
+      if (img.complete) {
+        img.classList.add('loaded');
+        const container = img.closest('.image-skeleton-container, .premium-card-image');
+        if (container) {
+          container.classList.remove('loading-skeleton');
+        }
+      } else {
+        img.addEventListener('load', function() {
+          img.classList.add('loaded');
+          const container = img.closest('.image-skeleton-container, .premium-card-image');
+          if (container) {
+            container.classList.remove('loading-skeleton');
+          }
+        });
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="custom-cursor-ring" id="customCursorRing"></div>
+
+  <!-- Premium Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <svg class="preloader-emblem" viewBox="0 0 100 100" width="80" height="80">
+        <path d="M50,15 L78,43 L60,85 L40,85 L22,43 Z" fill="none" stroke="#D4AF37" stroke-width="2"/>
+        <circle cx="50" cy="50" r="10" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+        <line x1="50" y1="15" x2="50" y2="85" stroke="#D4AF37" stroke-width="1"/>
+        <line x1="22" y1="43" x2="78" y2="43" stroke="#D4AF37" stroke-width="1"/>
+      </svg>
+      <h1 class="preloader-title">AURELIA</h1>
+      <p class="preloader-subtitle">GOURMET</p>
+      <div class="preloader-bar">
+        <div class="preloader-progress" id="preloaderProgress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Luxury Header -->
+  <header class="luxury-header" id="header">
+    <div class="header-container">
+      <!-- Logo Branding -->
+      <a href="#hero" class="logo-link cursor-hover">
+        <div class="logo-emblem">
+          <svg viewBox="0 0 100 100" width="36" height="36">
+            <path d="M50,15 L78,43 L60,85 L40,85 L22,43 Z" fill="none" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">AURELIA</span>
+          <span class="logo-subtitle">GOURMET</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="desktop-nav">
+        <ul class="nav-list">
+          <li><a href="#hero" class="nav-link cursor-hover active">Home</a></li>
+          <li><a href="#products" class="nav-link cursor-hover">Boutique</a></li>
+          <li><a href="#about" class="nav-link cursor-hover">Our Story</a></li>
+          <li><a href="#why-choose" class="nav-link cursor-hover">Pillars</a></li>
+          <li><a href="#collections" class="nav-link cursor-hover">Collections</a></li>
+          <li><a href="#testimonials" class="nav-link cursor-hover">Connoisseurs</a></li>
+        </ul>
+      </nav>
+
+      <!-- Navigation Actions -->
+      <div class="header-actions">
+        <button class="cart-trigger cursor-hover" id="cartTrigger" aria-label="Shopping Bag">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <a href="#products" class="btn btn-gold btn-header cursor-hover">Reserve Now</a>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-toggle cursor-hover" id="mobileToggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Dropdown Navigation Menu -->
+  <div class="mobile-nav-panel" id="mobileNavPanel">
+    <div class="mobile-nav-content">
+      <ul class="mobile-nav-list">
+        <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+        <li><a href="#products" class="mobile-nav-link">Boutique</a></li>
+        <li><a href="#about" class="mobile-nav-link">Our Story</a></li>
+        <li><a href="#why-choose" class="mobile-nav-link">Pillars</a></li>
+        <li><a href="#collections" class="mobile-nav-link">Collections</a></li>
+        <li><a href="#testimonials" class="mobile-nav-link">Connoisseurs</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="#products" class="btn btn-gold cursor-hover">Reserve Premium Box</a>
+        <p class="mobile-contact-info">concierge@aureliagourmet.com</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-parallax"></div>
+      <div class="hero-gold-glow"></div>
+      
+      <div class="container hero-container">
+        <!-- Hero Left Description -->
+        <div class="hero-text-content reveal-on-scroll">
+          <div class="luxury-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>The Gold Standard of Organic Luxury</span>
+          </div>
+          
+          <h1 class="hero-title">
+            The Gold Of <br>
+            <span class="gold-gradient-text">The Earth</span>
+          </h1>
+          
+          <p class="hero-description">
+            Indulge in Aurelia Gourmet's masterfully handpicked imperial dry fruits. Imported from deep volcanic soils and ancient estates, cured to absolute perfection for the ultra-refined palate.
+          </p>
+          
+          <div class="hero-actions-container">
+            <a href="#products" class="btn btn-gold btn-lg cursor-hover">
+              <span>Explore Boutique</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#about" class="btn btn-outline btn-lg cursor-hover">Our Heritage</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num">1%</span>
+              <span class="stat-label">Crop Selection</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">24k</span>
+              <span class="stat-label">Premium Standard</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">18</span>
+              <span class="stat-label">Sovereign Estates</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right Floating 3D Showcase -->
+        <div class="hero-visual-content reveal-on-scroll">
+          <div class="visual-circle-halo"></div>
+          
+          <!-- Layered Interactive Floating Renders -->
+          <div class="floating-items-container">
+            
+            <div class="floating-item item-1 floating-slow" data-parallax-speed="1.2">
+              <div class="image-skeleton-container loading-skeleton" style="border-radius: 50%;">
+                <img src="images/california-gold-almonds.webp" 
+                     alt="California Gold Almonds" 
+                     class="hero-parallax-img img-fluid fade-in-img"
+                     width="180" height="180"
+                     decoding="async"
+                     onload="initImageLoad(this)"
+                     onerror="handleBrokenImage(this)">
+              </div>
+              <span class="float-tag">Imperial Almonds</span>
+            </div>
+            
+            <div class="floating-item item-2 floating-medium" data-parallax-speed="1.8">
+              <div class="image-skeleton-container loading-skeleton" style="border-radius: 50%;">
+                <img src="images/imperial-saffron-collection.webp" 
+                     alt="Imperial Saffron Collection" 
+                     class="hero-parallax-img img-fluid fade-in-img"
+                     width="220" height="220"
+                     decoding="async"
+                     onload="initImageLoad(this)"
+                     onerror="handleBrokenImage(this)">
+              </div>
+              <span class="float-tag">Persian Saffron</span>
+            </div>
+
+            <div class="floating-item item-3 floating-fast" data-parallax-speed="0.8">
+              <div class="image-skeleton-container loading-skeleton" style="border-radius: 50%;">
+                <img src="images/velvet-ivory-cashews.webp" 
+                     alt="Velvet Ivory Cashews" 
+                     class="hero-parallax-img img-fluid fade-in-img"
+                     width="140" height="140"
+                     decoding="async"
+                     onload="initImageLoad(this)"
+                     onerror="handleBrokenImage(this)">
+              </div>
+              <span class="float-tag">Velvet Cashews</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 2. PREMIUM PRODUCTS SECTION -->
+    <section class="products-section" id="products">
+      <div class="container">
+        
+        <div class="section-header reveal-on-scroll">
+          <span class="section-subtitle">Gourmet Boutique</span>
+          <h2 class="section-title">The Imperial Reserve</h2>
+          <div class="section-divider">
+            <span class="line"></span>
+            <span class="emblem-dot"></span>
+            <span class="line"></span>
+          </div>
+          <p class="section-description">
+            Discover unmatched excellence. Hand-selected, master-roasted, and luxury-sealed to offer a premium gastronomic symphony.
+          </p>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="products-grid">
+          
+          <!-- Card 1: Almonds -->
+          <div class="product-card reveal-on-scroll">
+            <div class="premium-card-image">
+              <div class="product-badge">Top Selection</div>
+              <img src="images/california-gold-almonds.webp" 
+                   alt="California Gold Almonds" 
+                   class="product-img fade-in-img" 
+                   width="400" height="300"
+                   loading="lazy"
+                   decoding="async"
+                   onload="initImageLoad(this)"
+                   onerror="handleBrokenImage(this)">
+              <div class="product-overlay">
+                <button class="btn btn-gold btn-sm btn-quick-add cursor-hover" data-id="1" data-name="California Gold Almonds" data-price="45.00">Add to Bag</button>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-meta">
+                <span class="product-origin">Estates of California</span>
+                <div class="product-rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="rating-num">(48)</span>
+                </div>
+              </div>
+              <h3 class="product-name">California Gold Almonds</h3>
+              <p class="product-desc">Colossal grade-size nonpareil almonds with a buttery, crisp texture and absolute sweetness.</p>
+              <div class="product-footer">
+                <span class="product-price">$45.00 <span class="unit">/ 500g</span></span>
+                <button class="add-to-cart-icon cursor-hover" data-id="1" data-name="California Gold Almonds" data-price="45.00" aria-label="Add to cart">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Cashews -->
+          <div class="product-card reveal-on-scroll">
+            <div class="premium-card-image">
+              <div class="product-badge">Cream Harvest</div>
+              <img src="images/velvet-ivory-cashews.webp" 
+                   alt="Velvet Ivory Cashews" 
+                   class="product-img fade-in-img" 
+                   width="400" height="300"
+                   loading="lazy"
+                   decoding="async"
+                   onload="initImageLoad(this)"
+                   onerror="handleBrokenImage(this)">
+              <div class="product-overlay">
+                <button class="btn btn-gold btn-sm btn-quick-add cursor-hover" data-id="2" data-name="Velvet Ivory Cashews" data-price="55.00">Add to Bag</button>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-meta">
+                <span class="product-origin">Vietnam Highlands</span>
+                <div class="product-rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="rating-num">(64)</span>
+                </div>
+              </div>
+              <h3 class="product-name">Velvet Ivory Cashews</h3>
+              <p class="product-desc">Whole white colossal-size cashews, delicately dry-roasted to preserve their ultra-creamy rich oils.</p>
+              <div class="product-footer">
+                <span class="product-price">$55.00 <span class="unit">/ 500g</span></span>
+                <button class="add-to-cart-icon cursor-hover" data-id="2" data-name="Velvet Ivory Cashews" data-price="55.00" aria-label="Add to cart">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Pistachios -->
+          <div class="product-card reveal-on-scroll">
+            <div class="premium-card-image">
+              <div class="product-badge">Gourmet Salted</div>
+              <img src="images/emperor-pistachios.webp" 
+                   alt="Emperor Pistachios" 
+                   class="product-img fade-in-img" 
+                   width="400" height="300"
+                   loading="lazy"
+                   decoding="async"
+                   onload="initImageLoad(this)"
+                   onerror="handleBrokenImage(this)">
+              <div class="product-overlay">
+                <button class="btn btn-gold btn-sm btn-quick-add cursor-hover" data-id="3" data-name="Emperor Pistachios" data-price="62.00">Add to Bag</button>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-meta">
+                <span class="product-origin">Sovereign Aegean Valley</span>
+                <div class="product-rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="rating-num">(72)</span>
+                </div>
+              </div>
+              <h3 class="product-name">Emperor Pistachios</h3>
+              <p class="product-desc">Vibrant green kernels, lightly cured in pink Himalayan salt and Persian saffron essence.</p>
+              <div class="product-footer">
+                <span class="product-price">$62.00 <span class="unit">/ 500g</span></span>
+                <button class="add-to-cart-icon cursor-hover" data-id="3" data-name="Emperor Pistachios" data-price="62.00" aria-label="Add to cart">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Walnuts -->
+          <div class="product-card reveal-on-scroll">
+            <div class="premium-card-image">
+              <div class="product-badge">Raw Sovereign</div>
+              <img src="images/himalayan-walnut-reserve.webp" 
+                   alt="Himalayan Walnut Reserve" 
+                   class="product-img fade-in-img" 
+                   width="400" height="300"
+                   loading="lazy"
+                   decoding="async"
+                   onload="initImageLoad(this)"
+                   onerror="handleBrokenImage(this)">
+              <div class="product-overlay">
+                <button class="btn btn-gold btn-sm btn-quick-add cursor-hover" data-id="4" data-name="Himalayan Walnut Reserve" data-price="68.00">Add to Bag</button>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-meta">
+                <span class="product-origin">Kashmir High Slopes</span>
+                <div class="product-rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="rating-num">(39)</span>
+                </div>
+              </div>
+              <h3 class="product-name">Himalayan Walnut Reserve</h3>
+              <p class="product-desc">Premium light halves, bursting with essential brain-boosting rich omega-3 oils and pure earthy notes.</p>
+              <div class="product-footer">
+                <span class="product-price">$68.00 <span class="unit">/ 400g</span></span>
+                <button class="add-to-cart-icon cursor-hover" data-id="4" data-name="Himalayan Walnut Reserve" data-price="68.00" aria-label="Add to cart">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Dates -->
+          <div class="product-card reveal-on-scroll">
+            <div class="premium-card-image">
+              <div class="product-badge">Rare Amber</div>
+              <img src="images/royal-medjool-dates.webp" 
+                   alt="Royal Medjool Dates" 
+                   class="product-img fade-in-img" 
+                   width="400" height="300"
+                   loading="lazy"
+                   decoding="async"
+                   onload="initImageLoad(this)"
+                   onerror="handleBrokenImage(this)">
+              <div class="product-overlay">
+                <button class="btn btn-gold btn-sm btn-quick-add cursor-hover" data-id="5" data-name="Royal Medjool Dates" data-price="75.00">Add to Bag</button>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-meta">
+                <span class="product-origin">Jordan Valley</span>
+                <div class="product-rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="rating-num">(88)</span>
+                </div>
+              </div>
+              <h3 class="product-name">Royal Medjool Dates</h3>
+              <p class="product-desc">Massive, luscious crown-jewel dates with a caramelized, rich melt-in-your-mouth luxury texture.</p>
+              <div class="product-footer">
+                <span class="product-price">$75.00 <span class="unit">/ 500g</span></span>
+                <button class="add-to-cart-icon cursor-hover" data-id="5" data-name="Royal Medjool Dates" data-price="75.00" aria-label="Add to cart">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Saffron -->
+          <div class="product-card reveal-on-scroll">
+            <div class="premium-card-image">
+              <div class="product-badge">Imperial Red</div>
+              <img src="images/imperial-saffron-collection.webp" 
+                   alt="Imperial Saffron Collection" 
+                   class="product-img fade-in-img" 
+                   width="400" height="300"
+                   loading="lazy"
+                   decoding="async"
+                   onload="initImageLoad(this)"
+                   onerror="handleBrokenImage(this)">
+              <div class="product-overlay">
+                <button class="btn btn-gold btn-sm btn-quick-add cursor-hover" data-id="6" data-name="Imperial Saffron Collection" data-price="120.00">Add to Bag</button>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-meta">
+                <span class="product-origin">Estates of Kashan</span>
+                <div class="product-rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="rating-num">(105)</span>
+                </div>
+              </div>
+              <h3 class="product-name">Imperial Saffron Collection</h3>
+              <p class="product-desc">Pure Grade-A Sargol threads with intense gold coloration power and exquisite aromatic luxury profile.</p>
+              <div class="product-footer">
+                <span class="product-price">$120.00 <span class="unit">/ 10g</span></span>
+                <button class="add-to-cart-icon cursor-hover" data-id="6" data-name="Imperial Saffron Collection" data-price="120.00" aria-label="Add to cart">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 3. ABOUT BRAND SECTION -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          
+          <!-- About Left: High-end image with double border frame -->
+          <div class="about-visual reveal-on-scroll">
+            <div class="about-image-frame-container">
+              <div class="border-frame-outer"></div>
+              <div class="border-frame-inner"></div>
+              <div class="premium-card-image">
+                <img src="images/our-story.webp" 
+                     alt="About Aurelia" 
+                     class="about-img fade-in-img" 
+                     width="600" height="600"
+                     loading="lazy"
+                     decoding="async"
+                     onload="initImageLoad(this)"
+                     onerror="handleBrokenImage(this)">
+              </div>
+              <div class="about-tag-overlay">
+                <span class="tag-title">Est. 1928</span>
+                <span class="tag-desc">Legacy of Taste</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- About Right: Story -->
+          <div class="about-text-content reveal-on-scroll">
+            <span class="section-subtitle text-left">Our Heritage</span>
+            <h2 class="section-title text-left">Nourishing Generations <br>With Pure Nobility</h2>
+            <div class="section-divider text-left">
+              <span class="line gold-line"></span>
+              <span class="emblem-dot"></span>
+            </div>
+            
+            <p class="about-body">
+              Born in ancient orchards under dry Mediterranean suns, the legacy of Aurelia is rooted in an unyielding passion for nature's true masterpieces. We believe that dry fruits are not merely fuel—they are geological jewels, crafted by the rich, nutrient-dense volcanic soils and clean crisp mountain spring waters.
+            </p>
+            <p class="about-body">
+              Each almond, date, and saffron thread we offer represents an unbroken chain of generational craftsmanship. We partner with exclusive boutique estates in California, Jordan, Kashmir, and Persian valleys, selecting only the finest 1% of the total annual crop. Hand-gathered at the dawn solstice and inspected under sterile ambient luxury, we package our products inside gold-embossed UV-protective glass jars to seal their original biological freshness.
+            </p>
+            
+            <div class="about-sig">
+              <div class="sig-name">Aurelia Al-Sabah</div>
+              <div class="sig-title">Grand Master Connoisseur</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 4. WHY CHOOSE US SECTION -->
+    <section class="why-choose-section" id="why-choose">
+      <div class="container">
+        
+        <div class="section-header reveal-on-scroll">
+          <span class="section-subtitle">Imperial Pillars</span>
+          <h2 class="section-title">The Art Of Quality</h2>
+          <div class="section-divider">
+            <span class="line"></span>
+            <span class="emblem-dot"></span>
+            <span class="line"></span>
+          </div>
+          <p class="section-description">
+            We transcend mass commercialization. To experience Aurelia Gourmet is to indulge in raw agricultural perfection, managed at every step by global experts.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          
+          <!-- Pillar 1: Freshness -->
+          <div class="pillar-card reveal-on-scroll">
+            <div class="pillar-icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" class="pillar-icon">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Solstice Freshness</h3>
+            <p class="pillar-desc">Harvested at exact biological peak maturity. Immediately shade-cured to lock in raw natural elements and natural oils.</p>
+          </div>
+
+          <!-- Pillar 2: Export Quality -->
+          <div class="pillar-card reveal-on-scroll">
+            <div class="pillar-icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" class="pillar-icon">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Imperial Selection</h3>
+            <p class="pillar-desc">Only the absolute highest standard grade and premium size kernel is allowed into an Aurelia embossed jar.</p>
+          </div>
+
+          <!-- Pillar 3: Handpicked -->
+          <div class="pillar-card reveal-on-scroll">
+            <div class="pillar-icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" class="pillar-icon">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Hand-Polished Artistry</h3>
+            <p class="pillar-desc">Individual hand inspection ensures that every nut and single saffron thread is structurally pristine and free of blemishes.</p>
+          </div>
+
+          <!-- Pillar 4: Delivery -->
+          <div class="pillar-card reveal-on-scroll">
+            <div class="pillar-icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" class="pillar-icon">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Concierge Delivery</h3>
+            <p class="pillar-desc">Shipped in temperature-monitored, luxury custom wooden vaults to protect vital delicate minerals.</p>
+          </div>
+
+          <!-- Pillar 5: Hygienic Packaging -->
+          <div class="pillar-card reveal-on-scroll">
+            <div class="pillar-icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" class="pillar-icon">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Hermetic Shielding</h3>
+            <p class="pillar-desc">Airtight nitrogen-flushed dark glass jars block all oxidation, preserving vital organic structure.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. FEATURED COLLECTIONS SECTION -->
+    <section class="collections-section" id="collections">
+      <div class="container">
+        
+        <div class="section-header reveal-on-scroll">
+          <span class="section-subtitle">Exclusive Gift Suites</span>
+          <h2 class="section-title">The Sovereign Collections</h2>
+          <div class="section-divider">
+            <span class="line"></span>
+            <span class="emblem-dot"></span>
+            <span class="line"></span>
+          </div>
+          <p class="section-description">
+            Elegantly designed for sovereign celebrations, VIP gifting, and imperial corporate tokens. Wrapped in textured velvet and dynamic mahogany details.
+          </p>
+        </div>
+
+        <!-- Animated Image Gallery -->
+        <div class="collections-grid">
+          
+          <!-- Collection Item 1 -->
+          <div class="collection-item reveal-on-scroll">
+            <div class="collection-img-wrapper">
+              <div class="premium-card-image">
+                <img src="images/premium-festival-box.webp" 
+                     alt="The Royal Sovereign Box" 
+                     class="collection-img fade-in-img" 
+                     width="400" height="600"
+                     loading="lazy"
+                     decoding="async"
+                     onload="initImageLoad(this)"
+                     onerror="handleBrokenImage(this)">
+              </div>
+              <div class="collection-content-overlay">
+                <span class="collection-tag">Imperial Tier</span>
+                <h3 class="collection-item-title">The Royal Sovereign Box</h3>
+                <p class="collection-item-desc">A handcrafted solid dark mahogany box housing almonds, cashews, medjool dates, Aegean valley pistachios, and Persian Saffron jars.</p>
+                <a href="#products" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collection Item 2 -->
+          <div class="collection-item reveal-on-scroll">
+            <div class="collection-img-wrapper">
+              <div class="premium-card-image">
+                <img src="images/luxury-gift-hamper.webp" 
+                     alt="The Solstice Velvet Hamper" 
+                     class="collection-img fade-in-img" 
+                     width="400" height="600"
+                     loading="lazy"
+                     decoding="async"
+                     onload="initImageLoad(this)"
+                     onerror="handleBrokenImage(this)">
+              </div>
+              <div class="collection-content-overlay">
+                <span class="collection-tag">Festive Reserve</span>
+                <h3 class="collection-item-title">The Solstice Velvet Hamper</h3>
+                <p class="collection-item-desc">Draped in emerald-gold royal velvet, containing rare custom-roasted dry fruit selections and honey glaze infusions.</p>
+                <a href="#products" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collection Item 3 -->
+          <div class="collection-item reveal-on-scroll">
+            <div class="collection-img-wrapper">
+              <div class="premium-card-image">
+                <img src="images/silk-road-apothecary.webp" 
+                     alt="The Silk Road Apothecary" 
+                     class="collection-img fade-in-img" 
+                     width="400" height="600"
+                     loading="lazy"
+                     decoding="async"
+                     onload="initImageLoad(this)"
+                     onerror="handleBrokenImage(this)">
+              </div>
+              <div class="collection-content-overlay">
+                <span class="collection-tag">Signature Blends</span>
+                <h3 class="collection-item-title">The Silk Road Apothecary</h3>
+                <p class="collection-item-desc">An artisanal copper casket boasting pure exotic roasted nuts, dry fruits, and delicate volcanic mineral pairings.</p>
+                <a href="#products" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 6. TESTIMONIALS SECTION -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container">
+        
+        <div class="section-header reveal-on-scroll">
+          <span class="section-subtitle">Connoisseur Endorsements</span>
+          <h2 class="section-title">Whispers Of Splendor</h2>
+          <div class="section-divider">
+            <span class="line"></span>
+            <span class="emblem-dot"></span>
+            <span class="line"></span>
+          </div>
+          <p class="section-description">
+            Read the testimonies of Michelin-starred culinary maestros and worldwide connoisseurs who accept nothing less than agricultural divinity.
+          </p>
+        </div>
+
+        <!-- Carousel Slider Outer Wrapper -->
+        <div class="testimonials-slider-wrapper reveal-on-scroll">
+          <div class="testimonials-container" id="testimonialSlider">
+            
+            <!-- Slide 1 -->
+            <div class="testimonial-slide active">
+              <div class="testimonial-quote-icon">“</div>
+              <p class="testimonial-text">
+                "Aurelia Gourmet completely redefines gastronomy. The creaminess of their Velvet Ivory Cashews is scientifically unparalleled. Their Persian Saffron is the single most potent, aromatic, and structurally pure harvest I have ever layered onto my signature dishes."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar-container">
+                  <div class="author-avatar-glow"></div>
+                  <!-- Inline initials placeholder but highly premium layout -->
+                  <div class="author-avatar">JR</div>
+                </div>
+                <div class="author-details">
+                  <h4 class="author-name">Chef Jean-Rudolf</h4>
+                  <p class="author-title">Three Michelin Star Exec, L'Orangerie</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="testimonial-slide">
+              <div class="testimonial-quote-icon">“</div>
+              <p class="testimonial-text">
+                "The Imperial Almonds from Aurelia have a crunch that is pure structural art. It is clear they select only the top 1% of the harvest. Receiving their Royal Sovereign Box feels like unlocking an antique chest of culinary gold."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar-container">
+                  <div class="author-avatar-glow"></div>
+                  <div class="author-avatar">LV</div>
+                </div>
+                <div class="author-details">
+                  <h4 class="author-name">Lady Victoria Montgomery</h4>
+                  <p class="author-title">Gourmet Columnist, luxury Living International</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="testimonial-slide">
+              <div class="testimonial-quote-icon">“</div>
+              <p class="testimonial-text">
+                "We exclusively order the Velvet Solstice Hamper for our board of directors and state VIP clients. The packaging represents pure visual wizardry and the dates melt in your mouth like high-end French butter. Aurelia is in a class of its own."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar-container">
+                  <div class="author-avatar-glow"></div>
+                  <div class="author-avatar">MB</div>
+                </div>
+                <div class="author-details">
+                  <h4 class="author-name">Marcus Sterling</h4>
+                  <p class="author-title">Founder, Sterling & Wealth Management</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Slider Navigation Dots -->
+          <div class="slider-dots" id="sliderDots">
+            <span class="slider-dot active" data-index="0"></span>
+            <span class="slider-dot" data-index="1"></span>
+            <span class="slider-dot" data-index="2"></span>
+          </div>
+          
+          <!-- Slider Navigation Arrows -->
+          <button class="slider-arrow arrow-prev cursor-hover" id="sliderPrev" aria-label="Previous Slide">&#10229;</button>
+          <button class="slider-arrow arrow-next cursor-hover" id="sliderNext" aria-label="Next Slide">&#10230;</button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 7. OFFER BANNER SECTION (FESTIVE SOLAR SOLSTICE) -->
+    <section class="offer-banner-section">
+      <div class="offer-banner-glow"></div>
+      <div class="container offer-container reveal-on-scroll">
+        <div class="offer-inner-border">
+          <div class="offer-text-block">
+            <span class="offer-badge">Venezia Winter Release</span>
+            <h2 class="offer-headline">The Solstice Grand Cru Box</h2>
+            <p class="offer-tagline">Secure your private allocation of our highly anticipated winter harvest. Extremely limited to 250 individually numbered mahogany cases.</p>
+            
+            <!-- Countdown Timer Container -->
+            <div class="countdown-timer-container">
+              
+              <div class="countdown-card">
+                <span class="countdown-num" id="days">00</span>
+                <span class="countdown-label">Days</span>
+              </div>
+              
+              <div class="countdown-card">
+                <span class="countdown-num" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+              </div>
+              
+              <div class="countdown-card">
+                <span class="countdown-num" id="minutes">00</span>
+                <span class="countdown-label">Mins</span>
+              </div>
+              
+              <div class="countdown-card">
+                <span class="countdown-num" id="seconds">00</span>
+                <span class="countdown-label">Secs</span>
+              </div>
+
+            </div>
+
+            <div class="offer-cta-block">
+              <a href="#products" class="btn btn-gold btn-lg cursor-hover">Request Allocation</a>
+              <p class="allocation-status">* 194 allocations remain as of today.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 8. NEWSLETTER & CONTACT FOOTER -->
+    <footer class="luxury-footer" id="contact">
+      <!-- Newsletter Section Inside Footer Area for seamlessness -->
+      <div class="newsletter-sub-section">
+        <div class="container container-sm reveal-on-scroll">
+          <div class="newsletter-card">
+            <h3 class="newsletter-title">Join The Aurelia Registry</h3>
+            <p class="newsletter-desc">Subscribe to gain priority allocation updates, seasonal gourmet recipes from culinary artisans, and exclusive private estate releases.</p>
+            
+            <form class="newsletter-form" id="newsletterForm">
+              <div class="input-glow-wrapper">
+                <input type="email" class="newsletter-input" placeholder="Your distinguished email" required aria-label="Distinguished Email">
+                <div class="input-border"></div>
+              </div>
+              <button type="submit" class="btn btn-gold cursor-hover">
+                <span>Join Registry</span>
+              </button>
+            </form>
+            <p class="newsletter-terms">* We values ultimate privacy. No spam. Unsubscribe at any time.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-main-content reveal-on-scroll">
+        <div class="footer-grid">
+          
+          <!-- Column 1: Brand Info -->
+          <div class="footer-col brand-col">
+            <a href="#hero" class="logo-link cursor-hover">
+              <div class="logo-emblem">
+                <svg viewBox="0 0 100 100" width="40" height="40">
+                  <path d="M50,15 L78,43 L60,85 L40,85 L22,43 Z" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                  <circle cx="50" cy="50" r="8" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="logo-text">
+                <span class="logo-title font-cinzel">AURELIA</span>
+                <span class="logo-subtitle">GOURMET</span>
+              </div>
+            </a>
+            <p class="brand-bio">
+              Aurelia Gourmet represents the pinnacle of premium geological harvest. Hand-curated, globally selected organic delicacies designed for premium modern preservation and nutritional sovereignty.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-icon cursor-hover" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="#" class="social-icon cursor-hover" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a href="#" class="social-icon cursor-hover" aria-label="Pinterest">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.8 8.2 6.7 9.6-.1-.8-.2-2.1 0-3 .2-.9 1.4-6.1 1.4-6.1s-.4-.7-.4-1.8c0-1.7 1-3 2.2-3 1.1 0 1.6.8 1.6 1.7 0 1.1-.7 2.7-1 4.2-.3 1.2.6 2.2 1.8 2.2 2.1 0 3.8-2.2 3.8-5.5 0-2.9-2.1-4.9-5-4.9-3.4 0-5.4 2.6-5.4 5.2 0 1 .4 2.1.9 2.7.1.1.1.2.1.3-.1.4-.3 1.2-.3 1.4-.1.2-.2.3-.4.2-1.2-.6-1.9-2.4-1.9-3.8 0-3.1 2.3-6 6.5-6 3.4 0 6.1 2.4 6.1 5.7 0 3.4-2.1 6.1-5.1 6.1-1 0-1.9-.5-2.2-1.2 0 0-.5 1.8-.6 2.3-.2.8-.8 1.8-1.2 2.5 1 .3 2 .5 3 .5 5.5 0 10-4.5 10-10S17.5 2 12 2z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="footer-col Links-col">
+            <h4 class="footer-col-title">The Boutique</h4>
+            <ul class="footer-links-list">
+              <li><a href="#hero" class="footer-link cursor-hover">Home Estates</a></li>
+              <li><a href="#products" class="footer-link cursor-hover">Imperial Products</a></li>
+              <li><a href="#about" class="footer-link cursor-hover">The Heritage Story</a></li>
+              <li><a href="#collections" class="footer-link cursor-hover">Velvet Collections</a></li>
+              <li><a href="#testimonials" class="footer-link cursor-hover">Connoisseur Reviews</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Certifications & Pillars -->
+          <div class="footer-col cert-col">
+            <h4 class="footer-col-title">Our Standards</h4>
+            <ul class="footer-links-list">
+              <li><span class="footer-static-item">100% Certified Organic</span></li>
+              <li><span class="footer-static-item">Non-GMO Verified</span></li>
+              <li><span class="footer-static-item">Sustainably Harvested</span></li>
+              <li><span class="footer-static-item">Fair Trade Estates Partner</span></li>
+              <li><span class="footer-static-item">Gluten-Free Pure Grade</span></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="footer-col contact-col">
+            <h4 class="footer-col-title">The Concierge</h4>
+            <ul class="footer-links-list">
+              <li>
+                <span class="contact-item">
+                  <span class="icon">&#9993;</span>
+                  <a href="mailto:concierge@aureliagourmet.com" class="footer-link cursor-hover">concierge@aureliagourmet.com</a>
+                </span>
+              </li>
+              <li>
+                <span class="contact-item">
+                  <span class="icon">&#9743;</span>
+                  <a href="tel:+18005558888" class="footer-link cursor-hover">+1 (800) 555-8888</a>
+                </span>
+              </li>
+              <li>
+                <span class="contact-item">
+                  <span class="icon">&#8986;</span>
+                  <span class="footer-static-item">Mon - Sat: 9 AM - 6 PM EST</span>
+                </span>
+              </li>
+              <li>
+                <span class="contact-item">
+                  <span class="icon">&#128205;</span>
+                  <span class="footer-static-item">Fifth Avenue Elite Chambers, Suite 880, New York</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-bottom-divider"></div>
+          <div class="footer-bottom-flex">
+            <p class="copyright-text">
+              &copy; 2026 Aurelia Gourmet S.p.A. All Sovereign Rights Reserved. Crafted for Ultimate Gastronomic Elegance.
+            </p>
+            <div class="footer-policy-links">
+              <a href="#" class="policy-link cursor-hover">Privacy Code</a>
+              <span class="sep">|</span>
+              <a href="#" class="policy-link cursor-hover">Concierge Terms</a>
+              <span class="sep">|</span>
+              <a href="#" class="policy-link cursor-hover">Allocation Registry</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- FLOATING CTA BUTTON (Inquire / Shop Drawer trigger) -->
+  <button class="floating-cta-btn cursor-hover" id="floatingCta" aria-label="Concierge Inquiry">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span class="floating-cta-text">Concierge</span>
+  </button>
+
+  <!-- LUXURY SHOPPING BAG DRAWER -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 class="cart-title">Your Sovereign Bag</h3>
+      <button class="cart-close-btn cursor-hover" id="cartCloseBtn" aria-label="Close Bag">&times;</button>
+    </div>
+    
+    <div class="cart-drawer-body">
+      <div class="cart-empty-message" id="cartEmptyMessage">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#FAF6F0" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <p>Your bag is currently empty of allocations.</p>
+        <a href="#products" class="btn btn-gold btn-sm cursor-hover" id="cartExploreBtn">Explore Reserves</a>
+      </div>
+      
+      <ul class="cart-items-list" id="cartItemsList">
+        <!-- Rendered dynamically via JS -->
+      </ul>
+    </div>
+    
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-summary-row">
+        <span>Allocation Value</span>
+        <span class="cart-subtotal" id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Concierge Delivery</span>
+        <span class="shipping-value">Complimentary</span>
+      </div>
+      <div class="cart-summary-total">
+        <span>Grand Sovereign Total</span>
+        <span class="cart-total-value" id="cartTotalValue">$0.00</span>
+      </div>
+      <button class="btn btn-gold btn-block cursor-hover" id="checkoutBtn">Secure Your Allocation</button>
+      <p class="checkout-hint">Payments secured by 256-bit encryption. Handpicked verification guaranteed.</p>
+    </div>
+  </div>
+
+  <!-- CONCIERGE INQUIRY DIALOG (POPUP) -->
+  <div class="dialog-overlay" id="dialogOverlay">
+    <div class="dialog-card">
+      <button class="dialog-close cursor-hover" id="dialogClose" aria-label="Close Popup">&times;</button>
+      <div class="dialog-header">
+        <h3 class="dialog-title">Elite Concierge Request</h3>
+        <p class="dialog-subtitle">Inquire about customized corporate corporate vaults or private estate allocations.</p>
+      </div>
+      <form class="dialog-form" id="conciergeForm">
+        <div class="form-group">
+          <label for="cName">Your Noble Name</label>
+          <input type="text" id="cName" class="form-control" required placeholder="e.g., Lord Sterling">
+        </div>
+        <div class="form-group">
+          <label for="cEmail">Direct Communication Email</label>
+          <input type="email" id="cEmail" class="form-control" required placeholder="e.g., contact@sterlingholdings.com">
+        </div>
+        <div class="form-group">
+          <label for="cRequest">Nature of Inquiry</label>
+          <select id="cRequest" class="form-control">
+            <option value="corporate">Bespoke Gifting (Corporate Tier)</option>
+            <option value="private">Private Estate Allocation Reservation</option>
+            <option value="custom">Custom Saffron Blend Development</option>
+            <option value="other">General Culinary Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cMessage">Message</label>
+          <textarea id="cMessage" class="form-control" rows="4" placeholder="Explain your distinguished requests..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold btn-block cursor-hover">Send Concierge Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Custom Notification Toaster -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- MAIN JAVASCRIPT BINDINGS -->
+  <script src="script.js"></script>
+</body>
+</html>
