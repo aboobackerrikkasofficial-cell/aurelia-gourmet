@@ -616,136 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => wishlistBadge.classList.remove('pulse'), 300);
     }
     
-    favoriteBtns.forEach(btn => {
-      const id = btn.getAttribute('data-id');
-      if (wishlist.includes(id)) {
-        btn.classList.add('active');
-        const svg = btn.querySelector('svg');
-        if (svg) {
-          svg.style.fill = '#D4AF37';
-          svg.style.stroke = '#D4AF37';
-        }
-      } else {
-        btn.classList.remove('active');
-        const svg = btn.querySelector('svg');
-        if (svg) {
-          svg.style.fill = 'none';
-          svg.style.stroke = 'currentColor';
-        }
-      }
-    });
-
-    renderWishlistDrawer();
-  }
-
-  function renderWishlistDrawer() {
-    if (!wishlistItemsList) return;
-    
-    if (wishlist.length === 0) {
-      wishlistEmptyMessage.style.display = 'flex';
-      wishlistItemsList.style.display = 'none';
-    } else {
-      wishlistEmptyMessage.style.display = 'none';
-      wishlistItemsList.style.display = 'flex';
-      
-      wishlistItemsList.innerHTML = '';
-      wishlist.forEach(id => {
-        const prod = productDB[id];
-        if (!prod) return;
-        
-        const li = document.createElement('li');
-        li.className = 'cart-item';
-        li.innerHTML = `
-          <div style="width: 75px; height: 75px; border-radius: var(--border-radius-sm); border: 1px solid rgba(197, 168, 128, 0.15); flex-shrink: 0; overflow: hidden;">
-            <img src="${prod.img}" alt="${prod.name}" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div class="cart-item-info" style="flex-grow: 1;">
-            <h4 class="cart-item-name">${prod.name}</h4>
-            <span class="cart-item-price">${prod.price.toFixed(2)}</span>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
-              <span class="cart-item-remove-btn cursor-hover remove-wishlist-item" data-id="${id}">Remove</span>
-              <button class="btn btn-gold btn-sm cursor-hover add-to-cart-from-wishlist" data-id="${id}" data-name="${prod.name}" data-price="${prod.price}" data-img="${prod.img}" style="padding: 0.3rem 0.8rem; font-size: 0.6rem;">Add to Bag</button>
-            </div>
-          </div>
-        `;
-        wishlistItemsList.appendChild(li);
-      });
-      bindCursorHoverTriggers();
-    }
-  }
-
-  function openWishlistDrawer() {
-    wishlistDrawerOverlay.classList.add('open');
-    wishlistDrawer.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeWishlistDrawer() {
-    wishlistDrawerOverlay.classList.remove('open');
-    wishlistDrawer.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  if (wishlistTrigger) wishlistTrigger.addEventListener('click', openWishlistDrawer);
-  if (wishlistCloseBtn) wishlistCloseBtn.addEventListener('click', closeWishlistDrawer);
-  if (wishlistDrawerOverlay) wishlistDrawerOverlay.addEventListener('click', closeWishlistDrawer);
-  if (wishlistExploreBtn) {
-    wishlistExploreBtn.addEventListener('click', () => {
-      closeWishlistDrawer();
-      window.location.href = '#products';
-    });
-  }
-
-  // Wishlist Drawer Actions (Remove / Add to Cart)
-  if (wishlistItemsList) {
-    wishlistItemsList.addEventListener('click', (e) => {
-      const removeBtn = e.target.closest('.remove-wishlist-item');
-      if (removeBtn) {
-        const id = removeBtn.getAttribute('data-id');
-        wishlist = wishlist.filter(item => item !== id);
-        localStorage.setItem('aurelia_wishlist', JSON.stringify(wishlist));
-        updateWishlistUI();
-        showLuxuryToast('Removed from private wishlist.');
-      }
-      
-      const addToCartBtn = e.target.closest('.add-to-cart-from-wishlist');
-      if (addToCartBtn) {
-        const id = addToCartBtn.getAttribute('data-id');
-        const name = addToCartBtn.getAttribute('data-name');
-        const price = parseFloat(addToCartBtn.getAttribute('data-price'));
-        const img = addToCartBtn.getAttribute('data-img');
-        
-        if (typeof addToCart === 'function') {
-          closeWishlistDrawer();
-          addToCart(id, name, price, img);
-        }
-      }
-    });
-  }
-
-  // Add click listeners to favorite buttons robustly
-  favoriteBtns.forEach(btn => {
-    // Remove old listeners if any by replacing node
-    const newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
-    
-    newBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation(); // Prevent opening product link if any
-      const id = newBtn.getAttribute('data-id');
-      if (wishlist.includes(id)) {
-        wishlist = wishlist.filter(item => item !== id);
-        showLuxuryToast('Removed from private wishlist.');
-      } else {
-        wishlist.push(id);
-        showLuxuryToast('Added to private wishlist.');
-      }
-      localStorage.setItem('aurelia_wishlist', JSON.stringify(wishlist));
-      updateWishlistUI();
-    });
-  });
-
-  updateWishlistUI();
+    updateWishlistUI();
 
   // ==========================================
   // 12. RATING SYSTEM UPGRADE
@@ -798,4 +669,169 @@ document.addEventListener('DOMContentLoaded', () => {
         stars.forEach(s => s.style.transform = 'scale(1)');
       });
     });
+  });
+
+  // ==========================================
+  // 13. QUICK VIEW MODAL
+  // ==========================================
+  const qvOverlay = document.getElementById('quickViewOverlay');
+  const qvModal = document.getElementById('quickViewModal');
+  const qvCloseBtn = document.getElementById('quickViewCloseBtn');
+  
+  const qvImage = document.getElementById('qvImage');
+  const qvTitle = document.getElementById('qvTitle');
+  const qvDesc = document.getElementById('qvDesc');
+  const qvOrigin = document.getElementById('qvOrigin');
+  const qvPrice = document.getElementById('qvPrice');
+  const qvRating = document.getElementById('qvRating');
+  
+  const qvAddToCartBtn = document.getElementById('qvAddToCartBtn');
+  const qvWishlistBtn = document.getElementById('qvWishlistBtn');
+  const qvWishlistIcon = document.getElementById('qvWishlistIcon');
+  
+  let currentQvId = null;
+
+  function openQuickView(id) {
+    const prod = productDB[id];
+    if (!prod) return;
+    
+    currentQvId = id;
+    qvImage.src = prod.img;
+    qvTitle.textContent = prod.name;
+    qvPrice.textContent = `$${prod.price.toFixed(2)}`;
+    
+    // Simulate some realistic descriptions/origins if not in DB
+    const descMap = {
+      '1': 'Colossal grade-size nonpareil almonds with a buttery, crisp texture and absolute sweetness.',
+      '2': 'Whole white colossal-size cashews, delicately dry-roasted to preserve their ultra-creamy rich oils.',
+      '3': 'Vibrant green kernels, lightly cured in pink Himalayan salt and Persian saffron essence.',
+      '4': 'Premium light halves, bursting with essential brain-boosting rich omega-3 oils and pure earthy notes.',
+      '5': 'Massive, luscious crown-jewel dates with a caramelized, rich melt-in-your-mouth luxury texture.',
+      '6': 'Pure Grade-A Sargol threads with intense gold coloration power and exquisite aromatic luxury profile.'
+    };
+    
+    const originMap = {
+      '1': 'Estates of California',
+      '2': 'Vietnam Highlands',
+      '3': 'Sovereign Aegean Valley',
+      '4': 'Kashmir High Slopes',
+      '5': 'Jordan Valley',
+      '6': 'Estates of Kashan'
+    };
+    
+    qvDesc.textContent = descMap[id] || 'Exclusive luxury reserve product.';
+    qvOrigin.textContent = originMap[id] || 'Sovereign Estate';
+    
+    // Update Wishlist button state in modal
+    updateQvWishlistState();
+    
+    qvOverlay.classList.add('open');
+    qvModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeQuickView() {
+    qvOverlay.classList.remove('open');
+    qvModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function updateQvWishlistState() {
+    if (!currentQvId || !qvWishlistIcon) return;
+    if (wishlist.includes(currentQvId)) {
+      qvWishlistIcon.style.fill = '#D4AF37';
+      qvWishlistIcon.style.stroke = '#D4AF37';
+      qvWishlistBtn.style.borderColor = '#D4AF37';
+    } else {
+      qvWishlistIcon.style.fill = 'none';
+      qvWishlistIcon.style.stroke = 'currentColor';
+      qvWishlistBtn.style.borderColor = 'var(--accent-gold)';
+    }
+  }
+
+  if (qvCloseBtn) qvCloseBtn.addEventListener('click', closeQuickView);
+  if (qvOverlay) qvOverlay.addEventListener('click', closeQuickView);
+  
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeQuickView();
+      if (typeof closeWishlistDrawer === 'function') closeWishlistDrawer();
+      if (typeof closeCartDrawer === 'function') closeCartDrawer();
+    }
+  });
+
+  if (qvAddToCartBtn) {
+    qvAddToCartBtn.addEventListener('click', () => {
+      const prod = productDB[currentQvId];
+      if (prod) {
+        closeQuickView();
+        addToCart(currentQvId, prod.name, prod.price, prod.img);
+      }
+    });
+  }
+
+  if (qvWishlistBtn) {
+    qvWishlistBtn.addEventListener('click', () => {
+      if (!currentQvId) return;
+      if (wishlist.includes(currentQvId)) {
+        wishlist = wishlist.filter(item => item !== currentQvId);
+        showLuxuryToast('Removed from private wishlist.');
+      } else {
+        wishlist.push(currentQvId);
+        showLuxuryToast('Added to private wishlist.');
+      }
+      localStorage.setItem('aurelia_wishlist', JSON.stringify(wishlist));
+      updateWishlistUI();
+      updateQvWishlistState();
+    });
+  }
+
+  // Bind Quick View Buttons dynamically
+  document.body.addEventListener('click', (e) => {
+    const qvBtn = e.target.closest('.quick-view-btn');
+    if (qvBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      // Need to find ID. Since the btn doesn't have ID, we find the closest product card
+      // In HTML, the add to cart button has data-id. Let's find it.
+      const overlay = qvBtn.nextElementSibling; // product-overlay
+      let id = null;
+      if (overlay) {
+        const addBtn = overlay.querySelector('.btn-quick-add');
+        if (addBtn) id = addBtn.getAttribute('data-id');
+      }
+      if (id) {
+        openQuickView(id);
+      } else {
+        // Fallback: look around
+        const container = qvBtn.closest('.premium-card-image');
+        if (container) {
+          const addBtn = container.querySelector('.btn-quick-add');
+          if (addBtn) id = addBtn.getAttribute('data-id');
+        }
+        if (id) openQuickView(id);
+      }
+    }
+  });
+
+  // Re-bind favorite buttons using event delegation to prevent cloning issues
+  document.body.addEventListener('click', (e) => {
+    const favBtn = e.target.closest('.favorite-btn');
+    if (favBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = favBtn.getAttribute('data-id');
+      if (!id) return;
+      
+      if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(item => item !== id);
+        showLuxuryToast('Removed from private wishlist.');
+      } else {
+        wishlist.push(id);
+        showLuxuryToast('Added to private wishlist.');
+      }
+      localStorage.setItem('aurelia_wishlist', JSON.stringify(wishlist));
+      updateWishlistUI();
+    }
   });

@@ -2961,3 +2961,87 @@ svg {
   flex-direction: column;
   justify-content: center;
 }
+
+/* Quick View Modal Styles */
+.quick-view-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 90%;
+  max-width: 900px;
+  background: var(--bg-deep-charcoal);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  z-index: 100002;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+}
+.quick-view-modal.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+.quick-view-content {
+  display: flex;
+  height: 500px;
+}
+.quick-view-img-container {
+  flex: 1;
+  background: var(--bg-matte-black);
+}
+.quick-view-details {
+  flex: 1;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.quick-view-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-gold-bright);
+}
+.quick-view-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-cream-muted);
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+.quick-view-status {
+  margin-bottom: 1.5rem;
+}
+.quick-view-price-row {
+  margin-bottom: 2rem;
+}
+.quick-view-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Ensure product overlay doesn't block clicks */
+.product-overlay {
+  pointer-events: none !important;
+}
+.product-overlay .btn {
+  pointer-events: auto !important;
+}
+
+@media (max-width: 768px) {
+  .quick-view-content {
+    flex-direction: column;
+    height: auto;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .quick-view-img-container {
+    height: 300px;
+    flex: none;
+  }
+  .quick-view-details {
+    padding: 2rem 1.5rem;
+  }
+}
