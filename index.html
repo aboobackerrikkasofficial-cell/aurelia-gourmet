@@ -108,6 +108,10 @@
 
       <!-- Navigation Actions -->
       <div class="header-actions">
+        <button class="cart-trigger cursor-hover wishlist-trigger" id="wishlistTrigger" aria-label="Wishlist" style="margin-right: 15px;">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="cart-badge wishlist-badge" id="wishlistBadge">0</span>
+        </button>
         <button class="cart-trigger cursor-hover" id="cartTrigger" aria-label="Shopping Bag">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -284,7 +288,7 @@
                    decoding="async"
                    onload="initImageLoad(this)"
                    onerror="handleBrokenImage(this)">
-              <button class="favorite-btn cursor-hover" onclick="event.preventDefault(); this.classList.toggle('active'); typeof showLuxuryToast === 'function' && showLuxuryToast('Updated private wishlist.')" aria-label="Add to wishlist">
+              <button class="favorite-btn cursor-hover" data-id="1" aria-label="Add to wishlist">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
               </button>
               <button class="quick-view-btn cursor-hover" onclick="event.preventDefault(); typeof showLuxuryToast === 'function' && showLuxuryToast('Opening product gallery...')">Quick View</button>
@@ -296,12 +300,12 @@
               <div class="product-meta">
                 <span class="product-origin">Estates of California</span>
                 <div class="product-rating">
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="rating-num">(48)</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="rating-num" data-count="48">(0)</span>
                 </div>
               </div>
               <h3 class="product-name">California Gold Almonds</h3>
@@ -330,7 +334,7 @@
                    decoding="async"
                    onload="initImageLoad(this)"
                    onerror="handleBrokenImage(this)">
-              <button class="favorite-btn cursor-hover" onclick="event.preventDefault(); this.classList.toggle('active'); typeof showLuxuryToast === 'function' && showLuxuryToast('Updated private wishlist.')" aria-label="Add to wishlist">
+              <button class="favorite-btn cursor-hover" data-id="2" aria-label="Add to wishlist">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
               </button>
               <button class="quick-view-btn cursor-hover" onclick="event.preventDefault(); typeof showLuxuryToast === 'function' && showLuxuryToast('Opening product gallery...')">Quick View</button>
@@ -342,12 +346,12 @@
               <div class="product-meta">
                 <span class="product-origin">Vietnam Highlands</span>
                 <div class="product-rating">
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="rating-num">(64)</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="rating-num" data-count="64">(0)</span>
                 </div>
               </div>
               <h3 class="product-name">Velvet Ivory Cashews</h3>
@@ -376,7 +380,7 @@
                    decoding="async"
                    onload="initImageLoad(this)"
                    onerror="handleBrokenImage(this)">
-              <button class="favorite-btn cursor-hover" onclick="event.preventDefault(); this.classList.toggle('active'); typeof showLuxuryToast === 'function' && showLuxuryToast('Updated private wishlist.')" aria-label="Add to wishlist">
+              <button class="favorite-btn cursor-hover" data-id="3" aria-label="Add to wishlist">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
               </button>
               <button class="quick-view-btn cursor-hover" onclick="event.preventDefault(); typeof showLuxuryToast === 'function' && showLuxuryToast('Opening product gallery...')">Quick View</button>
@@ -388,12 +392,12 @@
               <div class="product-meta">
                 <span class="product-origin">Sovereign Aegean Valley</span>
                 <div class="product-rating">
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="rating-num">(72)</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="rating-num" data-count="72">(0)</span>
                 </div>
               </div>
               <h3 class="product-name">Emperor Pistachios</h3>
@@ -422,7 +426,7 @@
                    decoding="async"
                    onload="initImageLoad(this)"
                    onerror="handleBrokenImage(this)">
-              <button class="favorite-btn cursor-hover" onclick="event.preventDefault(); this.classList.toggle('active'); typeof showLuxuryToast === 'function' && showLuxuryToast('Updated private wishlist.')" aria-label="Add to wishlist">
+              <button class="favorite-btn cursor-hover" data-id="4" aria-label="Add to wishlist">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
               </button>
               <button class="quick-view-btn cursor-hover" onclick="event.preventDefault(); typeof showLuxuryToast === 'function' && showLuxuryToast('Opening product gallery...')">Quick View</button>
@@ -434,12 +438,12 @@
               <div class="product-meta">
                 <span class="product-origin">Kashmir High Slopes</span>
                 <div class="product-rating">
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="rating-num">(39)</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="rating-num" data-count="39">(0)</span>
                 </div>
               </div>
               <h3 class="product-name">Himalayan Walnut Reserve</h3>
@@ -468,7 +472,7 @@
                    decoding="async"
                    onload="initImageLoad(this)"
                    onerror="handleBrokenImage(this)">
-              <button class="favorite-btn cursor-hover" onclick="event.preventDefault(); this.classList.toggle('active'); typeof showLuxuryToast === 'function' && showLuxuryToast('Updated private wishlist.')" aria-label="Add to wishlist">
+              <button class="favorite-btn cursor-hover" data-id="5" aria-label="Add to wishlist">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
               </button>
               <button class="quick-view-btn cursor-hover" onclick="event.preventDefault(); typeof showLuxuryToast === 'function' && showLuxuryToast('Opening product gallery...')">Quick View</button>
@@ -480,12 +484,12 @@
               <div class="product-meta">
                 <span class="product-origin">Jordan Valley</span>
                 <div class="product-rating">
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="rating-num">(88)</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="rating-num" data-count="88">(0)</span>
                 </div>
               </div>
               <h3 class="product-name">Royal Medjool Dates</h3>
@@ -514,7 +518,7 @@
                    decoding="async"
                    onload="initImageLoad(this)"
                    onerror="handleBrokenImage(this)">
-              <button class="favorite-btn cursor-hover" onclick="event.preventDefault(); this.classList.toggle('active'); typeof showLuxuryToast === 'function' && showLuxuryToast('Updated private wishlist.')" aria-label="Add to wishlist">
+              <button class="favorite-btn cursor-hover" data-id="6" aria-label="Add to wishlist">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
               </button>
               <button class="quick-view-btn cursor-hover" onclick="event.preventDefault(); typeof showLuxuryToast === 'function' && showLuxuryToast('Opening product gallery...')">Quick View</button>
@@ -526,12 +530,12 @@
               <div class="product-meta">
                 <span class="product-origin">Estates of Kashan</span>
                 <div class="product-rating">
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="rating-num">(105)</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="star interactive-star">&#9733;</span>
+                  <span class="rating-num" data-count="105">(0)</span>
                 </div>
               </div>
               <h3 class="product-name">Imperial Saffron Collection</h3>
@@ -714,7 +718,7 @@
         <div class="collections-grid">
           
           <!-- Collection Item 1 -->
-          <a href="#products" class="collection-item reveal-on-scroll">
+          <div class="collection-item reveal-on-scroll cursor-hover" onclick="window.location.href='#products'">
             <div class="collection-img-wrapper">
               <div class="premium-card-image">
                 <img src="images/premium-festival-box.webp" 
@@ -730,13 +734,13 @@
                 <span class="collection-tag">Imperial Tier</span>
                 <h3 class="collection-item-title">The Royal Sovereign Box</h3>
                 <p class="collection-item-desc">A handcrafted solid dark mahogany box housing almonds, cashews, medjool dates, Aegean valley pistachios, and Persian Saffron jars.</p>
-                <a href="#products" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
+                <a href="#products" onclick="event.stopPropagation()" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
               </div>
             </div>
-          </a>
+          </div>
 
           <!-- Collection Item 2 -->
-          <a href="#products" class="collection-item reveal-on-scroll">
+          <div class="collection-item reveal-on-scroll cursor-hover" onclick="window.location.href='#products'">
             <div class="collection-img-wrapper">
               <div class="premium-card-image">
                 <img src="images/luxury-gift-hamper.webp" 
@@ -752,13 +756,13 @@
                 <span class="collection-tag">Festive Reserve</span>
                 <h3 class="collection-item-title">The Solstice Velvet Hamper</h3>
                 <p class="collection-item-desc">Draped in emerald-gold royal velvet, containing rare custom-roasted dry fruit selections and honey glaze infusions.</p>
-                <a href="#products" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
+                <a href="#products" onclick="event.stopPropagation()" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
               </div>
             </div>
-          </a>
+          </div>
 
           <!-- Collection Item 3 -->
-          <a href="#products" class="collection-item reveal-on-scroll">
+          <div class="collection-item reveal-on-scroll cursor-hover" onclick="window.location.href='#products'">
             <div class="collection-img-wrapper">
               <div class="premium-card-image">
                 <img src="images/silk-road-apothecary.webp" 
@@ -774,7 +778,7 @@
                 <span class="collection-tag">Signature Blends</span>
                 <h3 class="collection-item-title">The Silk Road Apothecary</h3>
                 <p class="collection-item-desc">An artisanal copper casket boasting pure exotic roasted nuts, dry fruits, and delicate volcanic mineral pairings.</p>
-                <a href="#products" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
+                <a href="#products" onclick="event.stopPropagation()" class="btn btn-gold btn-sm cursor-hover">Reserve Pack</a>
               </div>
             </div>
           </div>

@@ -584,3 +584,102 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+  // ==========================================
+  // 11. WISHLIST SYSTEM
+  // ==========================================
+  let wishlist = JSON.parse(localStorage.getItem('aurelia_wishlist') || '[]');
+  const wishlistBadge = document.getElementById('wishlistBadge');
+  const favoriteBtns = document.querySelectorAll('.favorite-btn');
+
+  function updateWishlistUI() {
+    if (wishlistBadge) {
+      wishlistBadge.textContent = wishlist.length;
+      wishlistBadge.classList.add('pulse');
+      setTimeout(() => wishlistBadge.classList.remove('pulse'), 300);
+    }
+    
+    favoriteBtns.forEach(btn => {
+      const id = btn.getAttribute('data-id');
+      if (wishlist.includes(id)) {
+        btn.classList.add('active');
+        btn.querySelector('svg').style.fill = '#D4AF37';
+        btn.querySelector('svg').style.stroke = '#D4AF37';
+      } else {
+        btn.classList.remove('active');
+        btn.querySelector('svg').style.fill = 'none';
+        btn.querySelector('svg').style.stroke = 'currentColor';
+      }
+    });
+  }
+
+  favoriteBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = btn.getAttribute('data-id');
+      if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(item => item !== id);
+        showLuxuryToast('Removed from private wishlist.');
+      } else {
+        wishlist.push(id);
+        showLuxuryToast('Added to private wishlist.');
+      }
+      localStorage.setItem('aurelia_wishlist', JSON.stringify(wishlist));
+      updateWishlistUI();
+    });
+  });
+
+  updateWishlistUI();
+
+  // ==========================================
+  // 12. RATING SYSTEM UPGRADE
+  // ==========================================
+  const ratingContainers = document.querySelectorAll('.product-rating');
+  ratingContainers.forEach(container => {
+    const stars = container.querySelectorAll('.interactive-star');
+    const numEl = container.querySelector('.rating-num');
+    
+    // Animate review count
+    if (numEl) {
+      const targetCount = parseInt(numEl.getAttribute('data-count') || 0);
+      let count = 0;
+      const step = Math.ceil(targetCount / 30);
+      const counterInterval = setInterval(() => {
+        count += step;
+        if (count >= targetCount) {
+          count = targetCount;
+          clearInterval(counterInterval);
+        }
+        numEl.textContent = `(${count})`;
+      }, 50);
+    }
+
+    // Star interaction
+    stars.forEach((star, index) => {
+      star.style.cursor = 'pointer';
+      
+      star.addEventListener('click', () => {
+        showLuxuryToast('Thank you for rating this masterpiece.');
+        stars.forEach((s, i) => {
+          if (i <= index) {
+            s.style.color = '#D4AF37';
+            s.style.textShadow = '0 0 10px rgba(212, 175, 55, 0.8)';
+          } else {
+            s.style.color = 'var(--text-cream-muted)';
+            s.style.textShadow = 'none';
+          }
+        });
+      });
+      
+      star.addEventListener('mouseenter', () => {
+        stars.forEach((s, i) => {
+          if (i <= index) s.style.transform = 'scale(1.2)';
+          else s.style.transform = 'scale(1)';
+        });
+      });
+      
+      star.addEventListener('mouseleave', () => {
+        stars.forEach(s => s.style.transform = 'scale(1)');
+      });
+    });
+  });
