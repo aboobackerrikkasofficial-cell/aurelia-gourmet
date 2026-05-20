@@ -591,6 +591,23 @@ document.addEventListener('DOMContentLoaded', () => {
   let wishlist = JSON.parse(localStorage.getItem('aurelia_wishlist') || '[]');
   const wishlistBadge = document.getElementById('wishlistBadge');
   const favoriteBtns = document.querySelectorAll('.favorite-btn');
+  const wishlistTrigger = document.getElementById('wishlistTrigger');
+  const wishlistDrawerOverlay = document.getElementById('wishlistDrawerOverlay');
+  const wishlistDrawer = document.getElementById('wishlistDrawer');
+  const wishlistCloseBtn = document.getElementById('wishlistCloseBtn');
+  const wishlistExploreBtn = document.getElementById('wishlistExploreBtn');
+  const wishlistItemsList = document.getElementById('wishlistItemsList');
+  const wishlistEmptyMessage = document.getElementById('wishlistEmptyMessage');
+
+  // Hardcoded product database for the wishlist since we don't have a backend
+  const productDB = {
+    '1': { name: 'California Gold Almonds', price: 45.00, img: 'images/california-gold-almonds.webp' },
+    '2': { name: 'Velvet Ivory Cashews', price: 55.00, img: 'images/velvet-ivory-cashews.webp' },
+    '3': { name: 'Emperor Pistachios', price: 62.00, img: 'images/emperor-pistachios.webp' },
+    '4': { name: 'Himalayan Walnut Reserve', price: 68.00, img: 'images/himalayan-walnut-reserve.webp' },
+    '5': { name: 'Royal Medjool Dates', price: 75.00, img: 'images/royal-medjool-dates.webp' },
+    '6': { name: 'Imperial Saffron Collection', price: 120.00, img: 'images/imperial-saffron-collection.webp' }
+  };
 
   function updateWishlistUI() {
     if (wishlistBadge) {
@@ -603,20 +620,119 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = btn.getAttribute('data-id');
       if (wishlist.includes(id)) {
         btn.classList.add('active');
-        btn.querySelector('svg').style.fill = '#D4AF37';
-        btn.querySelector('svg').style.stroke = '#D4AF37';
+        const svg = btn.querySelector('svg');
+        if (svg) {
+          svg.style.fill = '#D4AF37';
+          svg.style.stroke = '#D4AF37';
+        }
       } else {
         btn.classList.remove('active');
-        btn.querySelector('svg').style.fill = 'none';
-        btn.querySelector('svg').style.stroke = 'currentColor';
+        const svg = btn.querySelector('svg');
+        if (svg) {
+          svg.style.fill = 'none';
+          svg.style.stroke = 'currentColor';
+        }
+      }
+    });
+
+    renderWishlistDrawer();
+  }
+
+  function renderWishlistDrawer() {
+    if (!wishlistItemsList) return;
+    
+    if (wishlist.length === 0) {
+      wishlistEmptyMessage.style.display = 'flex';
+      wishlistItemsList.style.display = 'none';
+    } else {
+      wishlistEmptyMessage.style.display = 'none';
+      wishlistItemsList.style.display = 'flex';
+      
+      wishlistItemsList.innerHTML = '';
+      wishlist.forEach(id => {
+        const prod = productDB[id];
+        if (!prod) return;
+        
+        const li = document.createElement('li');
+        li.className = 'cart-item';
+        li.innerHTML = `
+          <div style="width: 75px; height: 75px; border-radius: var(--border-radius-sm); border: 1px solid rgba(197, 168, 128, 0.15); flex-shrink: 0; overflow: hidden;">
+            <img src="${prod.img}" alt="${prod.name}" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="cart-item-info" style="flex-grow: 1;">
+            <h4 class="cart-item-name">${prod.name}</h4>
+            <span class="cart-item-price">${prod.price.toFixed(2)}</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
+              <span class="cart-item-remove-btn cursor-hover remove-wishlist-item" data-id="${id}">Remove</span>
+              <button class="btn btn-gold btn-sm cursor-hover add-to-cart-from-wishlist" data-id="${id}" data-name="${prod.name}" data-price="${prod.price}" data-img="${prod.img}" style="padding: 0.3rem 0.8rem; font-size: 0.6rem;">Add to Bag</button>
+            </div>
+          </div>
+        `;
+        wishlistItemsList.appendChild(li);
+      });
+      bindCursorHoverTriggers();
+    }
+  }
+
+  function openWishlistDrawer() {
+    wishlistDrawerOverlay.classList.add('open');
+    wishlistDrawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeWishlistDrawer() {
+    wishlistDrawerOverlay.classList.remove('open');
+    wishlistDrawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (wishlistTrigger) wishlistTrigger.addEventListener('click', openWishlistDrawer);
+  if (wishlistCloseBtn) wishlistCloseBtn.addEventListener('click', closeWishlistDrawer);
+  if (wishlistDrawerOverlay) wishlistDrawerOverlay.addEventListener('click', closeWishlistDrawer);
+  if (wishlistExploreBtn) {
+    wishlistExploreBtn.addEventListener('click', () => {
+      closeWishlistDrawer();
+      window.location.href = '#products';
+    });
+  }
+
+  // Wishlist Drawer Actions (Remove / Add to Cart)
+  if (wishlistItemsList) {
+    wishlistItemsList.addEventListener('click', (e) => {
+      const removeBtn = e.target.closest('.remove-wishlist-item');
+      if (removeBtn) {
+        const id = removeBtn.getAttribute('data-id');
+        wishlist = wishlist.filter(item => item !== id);
+        localStorage.setItem('aurelia_wishlist', JSON.stringify(wishlist));
+        updateWishlistUI();
+        showLuxuryToast('Removed from private wishlist.');
+      }
+      
+      const addToCartBtn = e.target.closest('.add-to-cart-from-wishlist');
+      if (addToCartBtn) {
+        const id = addToCartBtn.getAttribute('data-id');
+        const name = addToCartBtn.getAttribute('data-name');
+        const price = parseFloat(addToCartBtn.getAttribute('data-price'));
+        const img = addToCartBtn.getAttribute('data-img');
+        
+        if (typeof addToCart === 'function') {
+          closeWishlistDrawer();
+          addToCart(id, name, price, img);
+        }
       }
     });
   }
 
+  // Add click listeners to favorite buttons robustly
   favoriteBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    // Remove old listeners if any by replacing node
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    
+    newBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const id = btn.getAttribute('data-id');
+      e.stopPropagation(); // Prevent opening product link if any
+      const id = newBtn.getAttribute('data-id');
       if (wishlist.includes(id)) {
         wishlist = wishlist.filter(item => item !== id);
         showLuxuryToast('Removed from private wishlist.');

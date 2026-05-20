@@ -1130,6 +1130,30 @@
     </div>
   </div>
 
+  
+  <!-- WISHLIST DRAWER OVERLAY -->
+  <div class="cart-overlay" id="wishlistDrawerOverlay"></div>
+  <div class="cart-drawer" id="wishlistDrawer">
+    <div class="cart-drawer-header">
+      <h3 class="cart-drawer-title">Private Wishlist</h3>
+      <button class="cart-close-btn cursor-hover" id="wishlistCloseBtn" aria-label="Close Wishlist">&times;</button>
+    </div>
+    
+    <div class="cart-drawer-body">
+      <div class="cart-empty-message" id="wishlistEmptyMessage">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#FAF6F0" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <p>Your private wishlist is empty.</p>
+        <button class="btn btn-gold btn-sm cursor-hover" id="wishlistExploreBtn" style="margin-top: 15px;">Explore Reserves</button>
+      </div>
+      
+      <ul class="cart-items-list" id="wishlistItemsList">
+        <!-- Rendered dynamically via JS -->
+      </ul>
+    </div>
+  </div>
+
   <!-- CONCIERGE INQUIRY DIALOG (POPUP) -->
   <div class="dialog-overlay" id="dialogOverlay">
     <div class="dialog-card">

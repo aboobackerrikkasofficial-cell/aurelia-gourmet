@@ -2947,3 +2947,17 @@ svg {
   display: inline-block;
   vertical-align: middle;
 }
+
+.favorite-btn {
+  pointer-events: auto !important;
+  z-index: 20 !important;
+}
+.wishlist-add-to-cart {
+  margin-top: 10px;
+  width: 100%;
+}
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
