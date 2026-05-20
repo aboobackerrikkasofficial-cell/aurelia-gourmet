@@ -6,8 +6,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // 0. CACHED IMAGE RECOVERY SCANNER
-  // ==========================================
   // ==========================================
   // 0. LUXURY LAZY LOADING & SMOOTH REVEAL ENGINE
   // ==========================================
